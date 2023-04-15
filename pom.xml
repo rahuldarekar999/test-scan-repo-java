@@ -3,11 +3,11 @@
 <parent>
 <groupId>org.apache.camel</groupId>
 <artifactId>components</artifactId>
-<version>3.10.0</version>
+<version>3.20.3</version>
 </parent>
 <groupId>org.apache.camel</groupId>
 <artifactId>camel-avro</artifactId>
-<version>3.10.0</version>
+<version>3.20.3</version>
 <name>Camel :: Avro</name>
 <description>Camel Avro data format</description>
 <licenses>
@@ -21,13 +21,13 @@
 <dependency>
 <groupId>org.apache.camel</groupId>
 <artifactId>camel-support</artifactId>
-<version>3.10.0</version>
+<version>3.20.3</version>
 <scope>compile</scope>
 </dependency>
 <dependency>
 <groupId>org.apache.avro</groupId>
 <artifactId>avro</artifactId>
-<version>1.10.2</version>
+<version>1.11.1</version>
 <scope>compile</scope>
 </dependency>
 </dependencies>
