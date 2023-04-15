@@ -3,27 +3,33 @@
 <parent>
 <groupId>org.apache.logging.log4j</groupId>
 <artifactId>log4j</artifactId>
-<version>2.0.2</version>
+<version>2.11.0</version>
 <relativePath>../</relativePath>
 </parent>
-<artifactId>log4j-slf4j-impl</artifactId>
+<artifactId>log4j-jcl</artifactId>
 <packaging>jar</packaging>
-<name>Apache Log4j SLF4J Binding</name>
-<description>SLF4J API binding to Log4j 2 Core</description>
+<name>Apache Log4j Commons Logging Bridge</name>
+<description>The Apache Log4j Commons Logging Adapter</description>
 <properties>
 <log4jParentDir>${basedir}/..</log4jParentDir>
-<docLabel>SLF4J Documentation</docLabel>
-<projectDir>/slf4j-impl</projectDir>
+<docLabel>JCL Bridge Documentation</docLabel>
+<projectDir>/jcl-bridge</projectDir>
+<module.name>org.apache.logging.log4j.jcl</module.name>
 </properties>
 <dependencies>
 <dependency>
-<groupId>org.slf4j</groupId>
-<artifactId>slf4j-api</artifactId>
+<groupId>junit</groupId>
+<artifactId>junit</artifactId>
+<scope>test</scope>
 </dependency>
 <dependency>
-<groupId>org.slf4j</groupId>
-<artifactId>slf4j-ext</artifactId>
-<optional>true</optional>
+<groupId>org.hamcrest</groupId>
+<artifactId>hamcrest-all</artifactId>
+<scope>test</scope>
+</dependency>
+<dependency>
+<groupId>commons-logging</groupId>
+<artifactId>commons-logging</artifactId>
 </dependency>
 <dependency>
 <groupId>org.apache.logging.log4j</groupId>
@@ -40,60 +46,9 @@
 <type>test-jar</type>
 <scope>test</scope>
 </dependency>
-<dependency>
-<groupId>junit</groupId>
-<artifactId>junit</artifactId>
-<scope>test</scope>
-</dependency>
 </dependencies>
 <build>
 <plugins>
-<plugin>
-<groupId>org.apache.maven.plugins</groupId>
-<artifactId>maven-surefire-plugin</artifactId>
-<configuration>
-<excludes>
-<exclude>**/*Test.java</exclude>
-</excludes>
-</configuration>
-<executions>
-<execution>
-<id>default-tests</id>
-<phase>test</phase>
-<goals>
-<goal>test</goal>
-</goals>
-<configuration>
-<includes>
-<include>**/*Test.java</include>
-</includes>
-<excludes>
-<exclude>**/OptionalTest.java</exclude>
-</excludes>
-</configuration>
-</execution>
-<execution>
-<id>test-optional</id>
-<phase>test</phase>
-<goals>
-<goal>test</goal>
-</goals>
-<configuration>
-<excludes>
-<exclude>**/LoggerTest.java</exclude>
-<exclude>**/MarkerTest.java</exclude>
-<exclude>**/SerializeTest.java</exclude>
-</excludes>
-<includes>
-<include>**/OptionalTest.java</include>
-</includes>
-<classpathDependencyExcludes>
-<classpathDependencyExcludes>org.slf4j:slf4j-ext</classpathDependencyExcludes>
-</classpathDependencyExcludes>
-</configuration>
-</execution>
-</executions>
-</plugin>
 <!--  Include the standard NOTICE and LICENSE  -->
 <plugin>
 <groupId>org.apache.maven.plugins</groupId>
@@ -114,7 +69,7 @@
 <artifactId>maven-bundle-plugin</artifactId>
 <configuration>
 <instructions>
-<Export-Package> org.apache.logging.slf4j, org.slf4j.impl </Export-Package>
+<Export-Package>org.apache.logging.log4j.jcl</Export-Package>
 </instructions>
 </configuration>
 </plugin>
@@ -135,12 +90,13 @@
 </reportSets>
 <configuration>
 <issueLinkTemplate>%URL%/show_bug.cgi?id=%ISSUE%</issueLinkTemplate>
+<useJql>true</useJql>
 </configuration>
 </plugin>
 <plugin>
 <groupId>org.apache.maven.plugins</groupId>
 <artifactId>maven-checkstyle-plugin</artifactId>
-<version>2.7</version>
+<version>${checkstyle.plugin.version}</version>
 <configuration>
 <!-- <propertiesLocation>${vfs.parent.dir}/checkstyle.properties</propertiesLocation>  -->
 <configLocation>${log4jParentDir}/checkstyle.xml</configLocation>
@@ -162,23 +118,6 @@
                project  -->
 <detectOfflineLinks>false</detectOfflineLinks>
 <linksource>true</linksource>
-<tags>
-<tag>
-<name>issue</name>
-<placement>a</placement>
-<head>JIRA issue:</head>
-</tag>
-<tag>
-<name>doubt</name>
-<placement>a</placement>
-<head>Troublesome:</head>
-</tag>
-<tag>
-<name>compare</name>
-<placement>a</placement>
-<head>Compare with:</head>
-</tag>
-</tags>
 </configuration>
 <reportSets>
 <reportSet>
@@ -192,7 +131,7 @@
 <plugin>
 <groupId>org.codehaus.mojo</groupId>
 <artifactId>findbugs-maven-plugin</artifactId>
-<version>2.5.2</version>
+<version>${findbugs.plugin.version}</version>
 <configuration>
 <fork>true</fork>
 <jvmArgs>-Duser.language=en</jvmArgs>
@@ -204,7 +143,7 @@
 <plugin>
 <groupId>org.apache.maven.plugins</groupId>
 <artifactId>maven-jxr-plugin</artifactId>
-<version>2.3</version>
+<version>${jxr.plugin.version}</version>
 <reportSets>
 <reportSet>
 <id>non-aggregate</id>
@@ -225,19 +164,8 @@
 <artifactId>maven-pmd-plugin</artifactId>
 <version>${pmd.plugin.version}</version>
 <configuration>
-<targetJdk>${maven.compile.target}</targetJdk>
+<targetJdk>${maven.compiler.target}</targetJdk>
 </configuration>
-</plugin>
-<plugin>
-<groupId>org.codehaus.mojo</groupId>
-<artifactId>cobertura-maven-plugin</artifactId>
-<version>${cobertura.plugin.version}</version>
-<reportSets>
-<reportSet>
-<!--  Disabled as it makes the site build very slow and causes the performance unit test to fail  -->
-<reports/>
-</reportSet>
-</reportSets>
 </plugin>
 </plugins>
 </reporting>
