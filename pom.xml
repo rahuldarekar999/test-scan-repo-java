@@ -6,14 +6,26 @@
 <artifactId>derby-project</artifactId>
 <version>10.16.1.1</version>
 </parent>
-<artifactId>derbyclient</artifactId>
-<name>Apache Derby Client JDBC Driver</name>
-<description>The Derby client JDBC driver, used to connect to a Derby server over a network connection.</description>
+<artifactId>derbynet</artifactId>
+<name>Apache Derby Network Server</name>
+<description>Contains the Apache Derby network server, which allows remote clients to connect to Derby databases over a network connection using the Derby client JDBC driver.</description>
 <url>http://db.apache.org/derby/</url>
 <dependencies>
 <dependency>
 <groupId>org.apache.derby</groupId>
+<artifactId>derby</artifactId>
+<version>10.16.1.1</version>
+<optional>false</optional>
+</dependency>
+<dependency>
+<groupId>org.apache.derby</groupId>
 <artifactId>derbyshared</artifactId>
+<version>10.16.1.1</version>
+<optional>false</optional>
+</dependency>
+<dependency>
+<groupId>org.apache.derby</groupId>
+<artifactId>derbytools</artifactId>
 <version>10.16.1.1</version>
 <optional>false</optional>
 </dependency>
@@ -27,7 +39,7 @@
 <phase>package</phase>
 <configuration>
 <target>
-<copy file="${basedir}/../../jars/${sanity}/derbyclient.jar" tofile="${basedir}/target/${project.build.finalName}.jar" overwrite="true"/>
+<copy file="${basedir}/../../jars/${sanity}/derbynet.jar" tofile="${basedir}/target/${project.build.finalName}.jar" overwrite="true"/>
 </target>
 </configuration>
 <goals>
