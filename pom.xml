@@ -158,7 +158,7 @@
 <micrometer.version>1.6.1</micrometer.version>
 <mimepull.version>1.9.13</mimepull.version>
 <mockito.version>3.6.0</mockito.version>
-<mongodb.version>4.1.1</mongodb.version>
+<mongodb.version>4.1.2</mongodb.version>
 <mssql-jdbc.version>8.4.1.jre8</mssql-jdbc.version>
 <mysql.version>8.0.22</mysql.version>
 <nekohtml.version>1.9.22</nekohtml.version>
