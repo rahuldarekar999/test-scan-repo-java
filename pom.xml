@@ -5,50 +5,44 @@
 <!--  that they should prefer consuming it instead.  -->
 <!--  do_not_remove: published-with-gradle-metadata  -->
 <modelVersion>4.0.0</modelVersion>
-<groupId>org.springframework.boot</groupId>
-<artifactId>spring-boot-devtools</artifactId>
-<version>3.0.5</version>
-<name>spring-boot-devtools</name>
-<description>Spring Boot Developer Tools</description>
-<url>https://spring.io/projects/spring-boot</url>
+<groupId>org.springframework</groupId>
+<artifactId>spring-core</artifactId>
+<version>6.0.8</version>
+<name>Spring Core</name>
+<description>Spring Core</description>
+<url>https://github.com/spring-projects/spring-framework</url>
 <organization>
-<name>VMware, Inc.</name>
-<url>https://spring.io</url>
+<name>Spring IO</name>
+<url>https://spring.io/projects/spring-framework</url>
 </organization>
 <licenses>
 <license>
 <name>Apache License, Version 2.0</name>
 <url>https://www.apache.org/licenses/LICENSE-2.0</url>
+<distribution>repo</distribution>
 </license>
 </licenses>
 <developers>
 <developer>
-<name>Spring</name>
-<email>ask@spring.io</email>
-<organization>VMware, Inc.</organization>
-<organizationUrl>https://www.spring.io</organizationUrl>
+<id>jhoeller</id>
+<name>Juergen Hoeller</name>
+<email>jhoeller@pivotal.io</email>
 </developer>
 </developers>
 <scm>
-<connection>scm:git:git://github.com/spring-projects/spring-boot.git</connection>
-<developerConnection>scm:git:ssh://git@github.com/spring-projects/spring-boot.git</developerConnection>
-<url>https://github.com/spring-projects/spring-boot</url>
+<connection>scm:git:git://github.com/spring-projects/spring-framework</connection>
+<developerConnection>scm:git:git://github.com/spring-projects/spring-framework</developerConnection>
+<url>https://github.com/spring-projects/spring-framework</url>
 </scm>
 <issueManagement>
 <system>GitHub</system>
-<url>https://github.com/spring-projects/spring-boot/issues</url>
+<url>https://github.com/spring-projects/spring-framework/issues</url>
 </issueManagement>
 <dependencies>
 <dependency>
-<groupId>org.springframework.boot</groupId>
-<artifactId>spring-boot</artifactId>
-<version>3.0.5</version>
-<scope>compile</scope>
-</dependency>
-<dependency>
-<groupId>org.springframework.boot</groupId>
-<artifactId>spring-boot-autoconfigure</artifactId>
-<version>3.0.5</version>
+<groupId>org.springframework</groupId>
+<artifactId>spring-jcl</artifactId>
+<version>6.0.8</version>
 <scope>compile</scope>
 </dependency>
 </dependencies>
