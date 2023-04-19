@@ -24,7 +24,6 @@ targetCompatibility = 1.8
 dependencies {
     implementation "joda-time:joda-time:1.6"
     implementation "com.google.guava:guava:27.0-jre"
-    testImplementation "junit:junit:4.12"
 }
 // end::dependencies[]
 
