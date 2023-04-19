@@ -1,36 +1,34 @@
+apply plugin: 'java'
+apply plugin: 'maven-publish'
 
-plugins {
-    id 'application'
+group = 'com.github.jitpack'
+version = '2.0'
+
+sourceCompatibility = 1.8 // java 8
+targetCompatibility = 1.8
+
+repositories {
+  mavenCentral()
 }
 
-apply plugin: 'application'
-mainClassName = 'employee.EmployeeApp'
+dependencies {
+  implementation 'com.google.guava:guava:29.0-jre'
+}
 
-sourceCompatibility = JavaVersion.VERSION_1_8
-targetCompatibility = JavaVersion.VERSION_1_8
+java {
+	withSourcesJar()
+	withJavadocJar()
+}
 
-println 'This is executed during configuration phase'
-
-task configured {
-    println 'The project is configured'
+publishing {
+    publications {
+        maven(MavenPublication) {
+		from components.java
+        }
+    }
 }
 
 wrapper {
-    gradleVersion = '5.3.1'
-}
-
-repositories {
-    mavenCentral()
-}
-
-
-dependencies {
-    ext.springVersion = '4.2.3.RELEASE'
-    compile "org.springframework:spring-jdbc:4.2.3.RELEASE"
-}
-
-
-
-test {
-    useJUnit()
+    gradleVersion = "7.3.3"
+    distributionType = Wrapper.DistributionType.ALL
 }
