@@ -1,13 +1,21 @@
 plugins {
-	id "org.springframework.boot.starter"
+    id 'application' 
 }
 
-description = "Starter for using Spring Security's OAuth2/OpenID Connect client features"
+repositories {
+    mavenCentral() 
+}
 
 dependencies {
-	api(project(":spring-boot-project:spring-boot-starters:spring-boot-starter"))
-	api("org.springframework.security:spring-security-config")
-	api("org.springframework.security:spring-security-core")
-	api("org.springframework.security:spring-security-oauth2-client")
-	api("org.springframework.security:spring-security-oauth2-jose")
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.9.1' 
+
+    implementation 'com.google.guava:guava:31.1-jre' 
+}
+
+application {
+    mainClass = 'demo.App' 
+}
+
+tasks.named('test') {
+    useJUnitPlatform() 
 }
