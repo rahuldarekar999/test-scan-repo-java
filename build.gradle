@@ -1,37 +1,53 @@
+apply plugin: "java"
+apply plugin: "eclipse"
+apply plugin: "idea"
 
-plugins {
-    id 'application'
-}
-
-apply plugin: 'application'
-mainClassName = 'employee.EmployeeApp'
-
-sourceCompatibility = JavaVersion.VERSION_1_8
-targetCompatibility = JavaVersion.VERSION_1_8
-
-println 'This is executed during configuration phase'
-
-task configured {
-    println 'The project is configured'
-}
-
-wrapper {
-    gradleVersion = '5.3.1'
-}
+group = "com.mycompany.hadoopproject"
+version = "1.0"
 
 repositories {
+    // Standard Maven 
     mavenCentral()
+    maven {
+        url "https://repository.cloudera.com/artifactory/cloudera-repos/"
+    }
 }
 
+// Mimic Maven 'provided' configuration, as suggested in GRADLE-784
+configurations {
+    provided
+}
+sourceSets {
+    main {
+        compileClasspath += configurations.provided
+    }
+}
+
+ext.hadoopVersion = "2.0.0-mr1-cdh4.0.1"
 dependencies {
+    provided "org.apache.hadoop:hadoop-client:${hadoopVersion}"
 
-    implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.10'
-    implementation group: 'commons-beanutils', name: 'commons-beanutils', version: '1.8.0'
-    implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.12.4'
-    testImplementation('junit:junit:4.13')
-    testRuntimeOnly('junit:junit:4.13')
+    // Example of adding a specific compile time dependency
+    compile "com.google.guava:guava:11.0.2"
+
+    testCompile "junit:junit:4.8.2"
 }
 
-test {
-    useJUnit()
+// Java version selection
+sourceCompatibility = 1.6
+targetCompatibility = 1.6
+
+eclipse {
+    classpath {
+        // Ensure Eclipse build output appears in build directory
+        defaultOutputDir = file("${buildDir}/eclipse-classes")
+        // Ensure the provided configuration jars are available in Eclipse
+        plusConfigurations += configurations.provided
+    }
+}
+
+// Emulate Maven shade plugin with a fat jar.
+// http://docs.codehaus.org/display/GRADLE/Cookbook#Cookbook-Creatingafatjar
+jar {
+    from configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
 }
