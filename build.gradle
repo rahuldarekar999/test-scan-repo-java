@@ -1,32 +1,10 @@
-apply plugin: 'java'
-apply plugin: 'eclipse'
-apply plugin: 'application'
+apply plugin: 'groovy'
 
-mainClassName = 'hello.HelloWorld'
-
-// tag::repositories[]
-repositories { 
-    mavenCentral() 
+repositories {
+   mavenCentral()
 }
-// end::repositories[]
-
-// tag::jar[]
-jar {
-    archiveBaseName = 'gs-gradle'
-    archiveVersion =  '0.1.0'
-}
-// end::jar[]
-
-// tag::dependencies[]
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
 
 dependencies {
-    implementation "joda-time:joda-time:1.6"
-    implementation "com.google.guava:guava:27.0-jre"
-    testImplementation "junit:junit:4.12"
+   compile 'org.codehaus.groovy:groovy-all:2.4.5'
+   testCompile 'junit:junit:4.12'
 }
-// end::dependencies[]
-
-// tag::wrapper[]
-// end::wrapper[]
