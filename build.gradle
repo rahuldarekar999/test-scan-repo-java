@@ -13,7 +13,7 @@ repositories {
 
 dependencies {
   ext.hadoopVersion = "27.1-jre"
-  implementation 'com.google.guava:guava:${hadoopVersion}'
+  implementation 'com.google.guava:guava:27.1-jre'
 }
 
 java {
