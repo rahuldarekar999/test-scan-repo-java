@@ -25,13 +25,8 @@ repositories {
 
 
 dependencies {
-
-    ext.hadoopVersion = "2.12.4"
-    implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.10'
-    implementation group: 'org.apache.commons', name: 'commons-io', version: '2.6'
-    implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '${hadoopVersion}'
-    testImplementation('junit:junit:4.13')
-    testRuntimeOnly('junit:junit:4.13')
+    ext.springVersion = '4.2.3.RELEASE'
+    compile "org.springframework:spring-jdbc:$springVersion"
 }
 
 
