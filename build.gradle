@@ -1,1 +1,14 @@
-build.gradle
+plugins {
+    id 'java-library'
+    id 'jacoco'
+    id 'org.sonarqube' version '2.7'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'commons-io:commons-io:2.6'
+    testImplementation 'junit:junit:4.+'
+}
