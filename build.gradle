@@ -1,53 +1,37 @@
-apply plugin: "java"
-apply plugin: "eclipse"
-apply plugin: "idea"
 
-group = "com.mycompany.hadoopproject"
-version = "1.0"
+plugins {
+    id 'application'
+}
+
+apply plugin: 'application'
+mainClassName = 'employee.EmployeeApp'
+
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
+
+println 'This is executed during configuration phase'
+
+task configured {
+    println 'The project is configured'
+}
+
+wrapper {
+    gradleVersion = '5.3.1'
+}
 
 repositories {
-    // Standard Maven 
     mavenCentral()
-    maven {
-        url "https://repository.cloudera.com/artifactory/cloudera-repos/"
-    }
 }
 
-// Mimic Maven 'provided' configuration, as suggested in GRADLE-784
-configurations {
-    provided
-}
-sourceSets {
-    main {
-        compileClasspath += configurations.provided
-    }
-}
-
-ext.hadoopVersion = "3.3.5"
 dependencies {
-    provided "org.apache.hadoop:hadoop-client:${hadoopVersion}"
 
-    // Example of adding a specific compile time dependency
-    compile "com.google.guava:guava:11.0.2"
-
-    testCompile "junit:junit:4.8.2"
+    implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.10'
+    implementation group: 'org.apache.commons', name: 'commons-io', version: '2.6'
+    implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.12.4'
+    testImplementation('junit:junit:4.13')
+    testRuntimeOnly('junit:junit:4.13')
 }
 
-// Java version selection
-sourceCompatibility = 1.6
-targetCompatibility = 1.6
-
-eclipse {
-    classpath {
-        // Ensure Eclipse build output appears in build directory
-        defaultOutputDir = file("${buildDir}/eclipse-classes")
-        // Ensure the provided configuration jars are available in Eclipse
-        plusConfigurations += configurations.provided
-    }
-}
-
-// Emulate Maven shade plugin with a fat jar.
-// http://docs.codehaus.org/display/GRADLE/Cookbook#Cookbook-Creatingafatjar
-jar {
-    from configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+test {
+    useJUnit()
 }
