@@ -1,2 +1,2 @@
-boolean.py>=3.6
+boolean.py=3.6
 python-dateutil
