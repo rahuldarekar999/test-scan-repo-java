@@ -40,7 +40,7 @@ pycodestyle==2.6.0
 pycparser==2.20
 pydoc-markdown==2.1.2
 pyflakes==2.2.0
-Pygments==2.8.1
+Pygments==2.7.4
 pymdown-extensions==6.2.1
 pyparsing==2.4.7
 pytest==6.2.2
