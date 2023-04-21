@@ -107,7 +107,7 @@
     <fastjson.version>1.2.31</fastjson.version>
     <apache.http.version>4.4.1</apache.http.version>
     <commons.lang3.version>3.3.2</commons.lang3.version>
-    <testng.version>6.5.1</testng.version>
+    <testng.version>7.7.0</testng.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <lombok.version>1.16.16</lombok.version>
     <easymock.version>3.0</easymock.version>
