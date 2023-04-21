@@ -9,12 +9,7 @@
   <packaging>pom</packaging>
   <name>uReplicator</name>
 
-  <modules>
-    <module>uReplicator-Controller</module>
-    <module>uReplicator-Manager</module>
-    <module>uReplicator-Common</module>
-    <module>uReplicator-Worker</module>
-  </modules>
+  
 
   <licenses>
     <license>
