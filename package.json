@@ -1,48 +1,34 @@
 {
-  "name": "react-art",
-  "description": "React ART is a JavaScript library for drawing vector graphics using React. It provides declarative and reactive bindings to the ART library. Using the same declarative API you can render the output to either Canvas, SVG or VML (IE8).",
-  "version": "18.2.0",
-  "main": "index.js",
+  "name": "react-devtools-core",
+  "version": "4.27.6",
+  "description": "Use react-devtools outside of the browser",
+  "license": "MIT",
+  "main": "./dist/backend.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/facebook/react.git",
-    "directory": "packages/react-art"
-  },
-  "keywords": [
-    "react",
-    "art",
-    "svg",
-    "vml",
-    "canvas",
-    "jsx"
-  ],
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/facebook/react/issues"
-  },
-  "homepage": "https://reactjs.org/",
-  "dependencies": {
-    "art": "^0.10.1",
-    "create-react-class": "^15.6.2",
-    "loose-envify": "^1.1.0",
-    "scheduler": "^0.23.0"
-  },
-  "peerDependencies": {
-    "react": "^18.2.0"
+    "directory": "packages/react-devtools-core"
   },
   "files": [
-    "LICENSE",
-    "README.md",
-    "index.js",
-    "cjs/",
-    "umd/",
-    "Circle.js",
-    "Rectangle.js",
-    "Wedge.js"
+    "dist",
+    "backend.js",
+    "standalone.js"
   ],
-  "browserify": {
-    "transform": [
-      "loose-envify"
-    ]
+  "scripts": {
+    "build": "yarn build:backend && yarn build:standalone",
+    "build:backend": "cross-env NODE_ENV=production webpack --config webpack.backend.js",
+    "build:backend:fb": "cross-env NODE_ENV=production FEATURE_FLAG_TARGET=core/backend-fb webpack --config webpack.backend.js",
+    "build:standalone": "cross-env NODE_ENV=production webpack --config webpack.standalone.js",
+    "build:standalone:fb": "cross-env NODE_ENV=production FEATURE_FLAG_TARGET=core/standalone-fb webpack --config webpack.standalone.js",
+    "prepublish": "yarn run build",
+    "start:backend": "cross-env NODE_ENV=development webpack --config webpack.backend.js --watch",
+    "start:standalone": "cross-env NODE_ENV=development webpack --config webpack.standalone.js --watch"
+  },
+  "dependencies": {
+    "shell-quote": "^1.6.1",
+    "ws": "^7"
+  },
+  "devDependencies": {
+    "cross-env": "^3.1.4"
   }
 }
